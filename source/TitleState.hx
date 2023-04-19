@@ -158,7 +158,7 @@ class TitleState extends MusicBeatState
 		Highscore.load();
 
 		// IGNORE THIS!!!
-		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
+		titleJSON = Json.parse(Paths.getTextFromFile('images/Title/title.json'));
 
 		#if TITLE_SCREEN_EASTER_EGG
 		if (FlxG.save.data.psychDevsEasterEgg == null) FlxG.save.data.psychDevsEasterEgg = ''; //Crash prevention
@@ -272,10 +272,10 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-
+		logoBl.frames = Paths.getSparrowAtlas('Title/EU-Logo');
+		logoBl.setGraphicSize(Std.int(logoBl.width * 0.8));
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.animation.addByPrefix('bump', 'Logo', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
@@ -312,9 +312,9 @@ class TitleState extends MusicBeatState
 			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
 			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
 			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-				gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
-				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				gfDance.frames = Paths.getSparrowAtlas('Title/Title_Dudes');
+				gfDance.animation.addByIndices('danceLeft', 'poip', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'poip', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		}
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -325,20 +325,20 @@ class TitleState extends MusicBeatState
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED)
-		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
+		var path = "mods/" + Paths.currentModDirectory + "/images/Title/titleEnter.png";
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)){
-			path = "mods/images/titleEnter.png";
+			path = "mods/images/Title/titleEnter.png";
 		}
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)){
-			path = "assets/images/titleEnter.png";
+			path = "assets/images/Title/titleEnter.png";
 		}
 		//trace(path, FileSystem.exists(path));
 		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
 
-		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		titleText.frames = Paths.getSparrowAtlas('Title/titleEnter');
 		#end
 		var animFrames:Array<FlxFrame> = [];
 		@:privateAccess {
