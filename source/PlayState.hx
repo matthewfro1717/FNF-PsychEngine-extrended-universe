@@ -1035,7 +1035,6 @@ class PlayState extends MusicBeatState
 		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
 		timeBarBG.screenCenter(X);
 		timeBarBG.scrollFactor.set();
-	        //timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
 		timeBarBG.alpha = 0;
 		timeBarBG.color = FlxColor.BLACK;
 		timeBarBG.xAdd = -4;
