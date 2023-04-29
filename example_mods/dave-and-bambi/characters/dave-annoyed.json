@@ -1,0 +1,100 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				11,
+				9
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down instance"
+		},
+		{
+			"offsets": [
+				19,
+				-10
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "left instance"
+		},
+		{
+			"offsets": [
+				-16,
+				20
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "up instance"
+		},
+		{
+			"offsets": [
+				-30,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right instance"
+		},
+		{
+			"offsets": [
+				-20,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "scared",
+			"loop": true,
+			"name": "scared instance"
+		},
+		{
+			"offsets": [
+				40,
+				10
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "um",
+			"loop": false,
+			"name": "um instance"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "dave/Dave_insanity_lol",
+	"position": [
+		0,
+		110
+	],
+	"healthicon": "dave-annoyed",
+	"flip_x": false,
+	"healthbar_colors": [
+		15,
+		95,
+		255
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

@@ -1,0 +1,7 @@
+{
+	"name": "golden",
+	"description": "golden-mods-folder-port",
+	"restart":false,
+	"runsGlobally": false,
+	"color": [170, 0, 255]
+}

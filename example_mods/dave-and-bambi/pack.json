@@ -1,0 +1,7 @@
+{
+	"name": "dave-and-bambi",
+	"description": "dave-and-bambi-mods-folder-port",
+	"restart":false,
+	"runsGlobally": false,
+	"color": [170, 0, 255]
+}

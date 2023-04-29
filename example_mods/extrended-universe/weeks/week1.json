@@ -1,0 +1,95 @@
+{
+	"storyName": "extrended universe",
+	"difficulties": "Normal",
+	"hideFreeplay": false,
+	"weekBackground": "universe",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Black-Spikes",
+			"dembo",
+			[
+				20,
+				20,
+				20
+			]
+		],
+		[
+			"Blue-Stars",
+			"bamblix",
+			[
+				0,
+				40,
+				255
+			]
+		],
+		[
+			"Figures",
+			"figumbi",
+			[
+				180,
+				0,
+				55
+			]
+		],
+		[
+			"Contented",
+			"bambiminion",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Burger-Blast",
+			"bamburg",
+			[
+				255,
+				195,
+				0
+			]
+		],
+		[
+			"Breakpoint",
+			"yambi",
+			[
+				255,
+				195,
+				0
+			]
+		],
+		[
+			"Deep-Dish",
+			"cruster",
+			[
+				235,
+				115,
+				0
+			]
+		],
+		[
+			"Fully-Breakfast",
+			"fully-breakfast",
+			[
+				255,
+				195,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "universe"
+}

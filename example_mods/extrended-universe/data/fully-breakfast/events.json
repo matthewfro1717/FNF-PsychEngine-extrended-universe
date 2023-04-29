@@ -1,0 +1,246 @@
+{
+	"song": {
+		"events": [
+			[
+				65649.3506493507,
+				[
+					[
+						"Replace stage layer",
+						"obj6",
+						"obj5"
+					]
+				]
+			],
+			[
+				65649.3506493507,
+				[
+					[
+						"Change Character",
+						"1",
+						"nuggbi"
+					]
+				]
+			],
+			[
+				92727.2727272727,
+				[
+					[
+						"Change Character",
+						"1",
+						"cakebi"
+					]
+				]
+			],
+			[
+				105974.025974026,
+				[
+					[
+						"ChangeSecondaryCharacter",
+						"nuggbi",
+						"cakebi"
+					]
+				]
+			],
+			[
+				121753.246753247,
+				[
+					[
+						"Change Character",
+						"1",
+						"nuggbi"
+					]
+				]
+			],
+			[
+				124675.324675325,
+				[
+					[
+						"Replace stage layer",
+						"obj7",
+						"obj6"
+					]
+				]
+			],
+			[
+				124675.324675325,
+				[
+					[
+						"Change Character",
+						"1",
+						"fully-breakfast-pichi"
+					]
+				]
+			],
+			[
+				185454.545454545,
+				[
+					[
+						"Change Character",
+						"1",
+						"chocolabi"
+					]
+				]
+			],
+			[
+				185454.545454545,
+				[
+					[
+						"Replace stage layer",
+						"obj8",
+						"obj7"
+					]
+				]
+			],
+			[
+				236883.116883117,
+				[
+					[
+						"Change Character",
+						"1",
+						"chocolabi-crazy"
+					]
+				]
+			],
+			[
+				266493.506493506,
+				[
+					[
+						"Change Character",
+						"1",
+						"bamburg"
+					]
+				]
+			],
+			[
+				266493.506493506,
+				[
+					[
+						"Replace stage layer",
+						"obj9",
+						"obj8"
+					]
+				]
+			],
+			[
+				330389.61038961,
+				[
+					[
+						"Replace stage layer",
+						"obj10",
+						"obj9"
+					]
+				]
+			],
+			[
+				330389.61038961,
+				[
+					[
+						"Change Character",
+						"1",
+						"baggett"
+					]
+				]
+			],
+			[
+				353766.233766233,
+				[
+					[
+						"Change Character",
+						"1",
+						"cakebi"
+					]
+				]
+			],
+			[
+				353766.233766233,
+				[
+					[
+						"Replace stage layer",
+						"obj11",
+						"obj10"
+					]
+				]
+			],
+			[
+				367792.207792207,
+				[
+					[
+						"Replace stage layer",
+						"obj12",
+						"obj11"
+					]
+				]
+			],
+			[
+				367792.207792207,
+				[
+					[
+						"Change Character",
+						"1",
+						"nuggbi"
+					]
+				]
+			],
+			[
+				380259.74025974,
+				[
+					[
+						"Change Character",
+						"1",
+						"fully-breakfast-pichi"
+					]
+				]
+			],
+			[
+				380259.74025974,
+				[
+					[
+						"Replace stage layer",
+						"obj13",
+						"obj12"
+					]
+				]
+			],
+			[
+				392727.272727272,
+				[
+					[
+						"Replace stage layer",
+						"obj14",
+						"obj13"
+					]
+				]
+			],
+			[
+				392727.272727272,
+				[
+					[
+						"Change Character",
+						"1",
+						"chocolabi"
+					]
+				]
+			],
+			[
+				405194.805194804,
+				[
+					[
+						"Change Character",
+						"1",
+						"bamburg"
+					]
+				]
+			],
+			[
+				405194.805194804,
+				[
+					[
+						"Replace stage layer",
+						"obj15",
+						"obj14"
+					]
+				]
+			]
+		]
+	}
+}

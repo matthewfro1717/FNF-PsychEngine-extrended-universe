@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				170,
+				10
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "left"
+		},
+		{
+			"offsets": [
+				120,
+				-40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "down"
+		},
+		{
+			"offsets": [
+				100,
+				90
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "up"
+		},
+		{
+			"offsets": [
+				60,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right"
+		},
+		{
+			"offsets": [
+				80,
+				20
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": true,
+			"name": "idle"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/fully-breakfast-pichi",
+	"position": [
+		-20,
+		210
+	],
+	"healthicon": "pichi",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		1,
+		81
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 0.8
+}

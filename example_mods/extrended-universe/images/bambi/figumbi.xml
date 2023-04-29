@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="figumbi.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="down0000" x="0" y="0" width="1282" height="600"/>
+	<SubTexture name="down0001" x="1282" y="0" width="1282" height="600"/>
+	<SubTexture name="down0002" x="2564" y="0" width="1282" height="600"/>
+	<SubTexture name="idle0000" x="0" y="600" width="1282" height="600" frameX="0" frameY="0" frameWidth="1283" frameHeight="600"/>
+	<SubTexture name="idle0001" x="1282" y="600" width="1282" height="600" frameX="-1" frameY="0" frameWidth="1283" frameHeight="600"/>
+	<SubTexture name="idle0002" x="2564" y="600" width="1282" height="600" frameX="-1" frameY="0" frameWidth="1283" frameHeight="600"/>
+	<SubTexture name="idle0003" x="0" y="1200" width="1282" height="600" frameX="-1" frameY="0" frameWidth="1283" frameHeight="600"/>
+	<SubTexture name="idle0004" x="1282" y="1200" width="1282" height="592" frameX="-1" frameY="-7" frameWidth="1283" frameHeight="600"/>
+	<SubTexture name="left0000" x="2564" y="1200" width="1282" height="600" frameX="0" frameY="0" frameWidth="1290" frameHeight="600"/>
+	<SubTexture name="left0001" x="0" y="1800" width="1282" height="600" frameX="0" frameY="0" frameWidth="1290" frameHeight="600"/>
+	<SubTexture name="left0002" x="1282" y="1800" width="1282" height="600" frameX="-8" frameY="0" frameWidth="1290" frameHeight="600"/>
+	<SubTexture name="right0000" x="2564" y="1800" width="1282" height="600" frameX="-6" frameY="0" frameWidth="1288" frameHeight="601"/>
+	<SubTexture name="right0001" x="0" y="2400" width="1282" height="600" frameX="-5" frameY="0" frameWidth="1288" frameHeight="601"/>
+	<SubTexture name="right0002" x="1282" y="2400" width="1282" height="600" frameX="0" frameY="-1" frameWidth="1288" frameHeight="601"/>
+	<SubTexture name="up0000" x="2564" y="2400" width="1282" height="600"/>
+	<SubTexture name="up0001" x="0" y="3000" width="1282" height="600"/>
+	<SubTexture name="up0002" x="1282" y="3000" width="1282" height="600"/>
+</TextureAtlas>

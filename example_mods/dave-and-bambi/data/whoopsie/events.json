@@ -1,0 +1,26 @@
+{
+	"song": {
+		"events": [
+			[
+				73142.8571428572,
+				[
+					[
+						"Change Character",
+						"1",
+						"unfair-expunged"
+					]
+				]
+			],
+			[
+				73142.8571428572,
+				[
+					[
+						"Replace stage layer",
+						"obj6",
+						"obj5"
+					]
+				]
+			]
+		]
+	}
+}

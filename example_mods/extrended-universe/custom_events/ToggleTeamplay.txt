@@ -1,0 +1,4 @@
+Change if a character follows Teamplay rules
+
+value 1: name_of_character
+value 2: You can set to "true" or "false" or leave blank to toggle.

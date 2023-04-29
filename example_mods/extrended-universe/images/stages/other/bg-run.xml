@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bg-run.png">
+	<!-- Created with Adobe Animate version 21.0.5.40714 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bg-run0000" x="5" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0001" x="5" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0002" x="1202" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0003" x="1202" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0004" x="2399" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0005" x="2399" y="5" width="1192" height="626"/>
+	<SubTexture name="bg-run0006" x="5" y="636" width="1192" height="626"/>
+	<SubTexture name="bg-run0007" x="5" y="636" width="1192" height="626"/>
+</TextureAtlas>
