@@ -36,18 +36,18 @@ class CreditsPopUp extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'black-spikes' | 'blue-stars' | 'contented' | 'breakpoint' | 'fully-breakfast' | 'stars' | 'goldy-breaker' | 'polynomial' | 'goofy-keyboard' | 'Iniustitiam' | 'codekill':
-				songCreator = 'stremblix';
-			case 'burger-blast':
-				songCreator = 'hazetal';
+		  case 'black-spikes' | 'blue-stars' | 'contented' | 'breakpoint' | 'fully-breakfast' | 'stars' | 'goldy-breaker' | 'polynomial' | 'goofy-keyboard' | 'Iniustitiam' | 'codekill':
+			songCreator = 'stremblix';
+		  case 'burger-blast':
+			songCreator = 'hazetal';
 		  case 'deep-dish':
-				songCreator = 'zlix';
+			songCreator = 'zlix';
 		  case 'powerfull-wheelchair' | 'corned' | 'whoopsie' | 'get-ready':
-				songCreator = 'roblox2aj';
+			songCreator = 'roblox2aj';
 		  case 'binomial':
-				songCreator = 'amgunt';
+			songCreator = 'amgunt';
 		  case 'egg-torsion':
-				songCreator = '';
+			songCreator = '';
 		}
 		switch (PlayState.storyWeek)
 		{
@@ -63,7 +63,17 @@ class CreditsPopUp extends FlxSpriteGroup
 				headingPath = {path: 'songHeadings/amguntHeading', antiAliasing: false, iconOffset: 0};
 			case 6:
 				headingPath = {path: 'songHeadings/unknownHeading', antiAliasing: false, iconOffset: 0};
+        	}
+		switch (PlayState.SONG.song.toLowerCase())
+		{
+			case 'polygonized' | 'interdimensional':
+				headingPath = {path: 'songHeadings/3D-daveHeading', antiAliasing: false, iconOffset: 0};				
 		}
+		if (PlayState.recursedStaticWeek)
+		{
+			headingPath = {path: 'songHeadings/somethingHeading', antiAliasing: false, iconOffset: 0};
+		}
+
 		if (headingPath != null)
 		{
 			if (headingPath.animation == null)
@@ -80,8 +90,9 @@ class CreditsPopUp extends FlxSpriteGroup
 			bg.antialiasing = headingPath.antiAliasing;
 			curHeading = headingPath;
 		}
-		createHeadingText(LanguageManager.getTextString("credits_songby") + ' ' + songCreator);
-		funnyIcon = new FlxSprite(0, 0, Paths.image('songCreators/${songCreatorIcon != '' ? songCreatorIcon : songCreator}'));
+		createHeadingText('Song by $songCreator');
+		
+		funnyIcon = new FlxSprite(0, 0, Paths.image('songCreators/' + songCreator));
 		rescaleIcon();
 		add(funnyIcon);
 
