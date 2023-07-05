@@ -65,11 +65,6 @@ class CreditsPopUp extends FlxSpriteGroup
 			case 'polygonized' | 'interdimensional':
 				headingPath = {path: 'songHeadings/3D-daveHeading', antiAliasing: false, iconOffset: 0};				
 		}
-		if (PlayState.recursedStaticWeek)
-		{
-			headingPath = {path: 'songHeadings/somethingHeading', antiAliasing: false, iconOffset: 0};
-		}
-
 		if (headingPath != null)
 		{
 			if (headingPath.animation == null)
