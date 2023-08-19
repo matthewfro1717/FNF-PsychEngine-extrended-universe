@@ -191,9 +191,9 @@ class ExtrasState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
+				if (optionShit[curSelected] == 'discord')
 				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+					System.exit(0);
 				}
 				else
 				{
