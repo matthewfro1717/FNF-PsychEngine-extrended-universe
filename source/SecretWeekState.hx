@@ -65,7 +65,7 @@ class SecretWeekState extends MusicBeatState
 		this.folder = Paths.currentModDirectory;
 		if(this.folder == null) this.folder = '';
 	}
-	
+
 	override function create()
 	{
 		//Paths.clearStoredMemory();
