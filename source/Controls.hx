@@ -150,7 +150,7 @@ class Controls extends FlxActionSet
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
-	var _seven = new FlxActionDigital(Action.SEVEN);
+	var _SEVEN = new FlxActionDigital(Action.SEVEN);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -302,7 +302,7 @@ class Controls extends FlxActionSet
 		return _reset.check();	
 	
 	inline function get_SEVEN()
-		return _seven.check();
+		return _SEVEN.check();
 
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
@@ -337,7 +337,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
-		add(_seven);
+		add(_SEVEN);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -377,7 +377,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
-		add(_seven);
+		add(_SEVEN);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -435,7 +435,7 @@ class Controls extends FlxActionSet
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
-			case SEVEN: _seven;
+			case SEVEN: _SEVEN;
 		}
 	}
 
@@ -496,7 +496,7 @@ class Controls extends FlxActionSet
 			case RESET:
 				func(_reset, JUST_PRESSED);
 			case SEVEN:
-				func(_seven, JUST_PRESSED);
+				func(_SEVEN, JUST_PRESSED);
 		}
 	}
 
@@ -665,7 +665,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, keysMap.get('back'));
 				inline bindKeys(Control.PAUSE, keysMap.get('pause'));
 				inline bindKeys(Control.RESET, keysMap.get('reset'));
-				inline bindKeys(Control.SEVEN, keysMap.get('seven'));
+				inline bindKeys(Control.SEVEN, keysMap.get('SEVEN'));
 			case Duo(true):
 				inline bindKeys(Control.UI_UP, [W]);
 				inline bindKeys(Control.UI_DOWN, [S]);
