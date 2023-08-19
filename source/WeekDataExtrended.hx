@@ -33,7 +33,7 @@ class WeekDataExtrended {
 	public var fileName:String;
 
 	public static function createWeekFile():WeekFile {
-		var weekFile:WeekFile = {
+		var weekFile:Bool = {
 			songs: [["Bopeebo", "dad", [146, 113, 253]], ["Fresh", "dad", [146, 113, 253]], ["Dad Battle", "dad", [146, 113, 253]]],
 			weekCharacters: ['dad', 'bf', 'gf'],
 			weekBackground: 'stage',
@@ -51,7 +51,7 @@ class WeekDataExtrended {
 	}
 
 	// HELP: Is there any way to convert a WeekFile to WeekData without having to put all variables there manually? I'm kind of a noob in haxe lmao
-	public function new(weekFile:WeekFile, fileName:String) {
+	public function new(weekFile:Bool, fileName:String) {
 		songs = weekFile.songs;
 		weekCharacters = weekFile.weekCharacters;
 		weekBackground = weekFile.weekBackground;
