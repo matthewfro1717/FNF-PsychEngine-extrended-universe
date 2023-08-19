@@ -11,11 +11,6 @@ import haxe.format.JsonParser;
 
 using StringTools;
 
-typedef WeekFile =
-{
-	// JSON variables
-}
-
 class WeekDataGolden {
 	public static var weeksLoaded:Map<String, WeekData> = new Map<String, WeekData>();
 	public static var weeksList:Array<String> = [];
