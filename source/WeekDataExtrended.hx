@@ -11,23 +11,6 @@ import haxe.format.JsonParser;
 
 using StringTools;
 
-typedef WeekFile =
-{
-	// JSON variables
-	var songs:Array<Dynamic>;
-	var weekCharacters:Array<String>;
-	var weekBackground:String;
-	var weekBefore:String;
-	var storyName:String;
-	var weekName:String;
-	var freeplayColor:Array<Int>;
-	var startUnlocked:Bool;
-	var hiddenUntilUnlocked:Bool;
-	var hideStoryMode:Bool;
-	var hideFreeplay:Bool;
-	var difficulties:String;
-}
-
 class WeekDataExtrended {
 	public static var weeksLoaded:Map<String, WeekData> = new Map<String, WeekData>();
 	public static var weeksList:Array<String> = [];
@@ -46,6 +29,19 @@ class WeekDataExtrended {
 	public var hideStoryMode:Bool;
 	public var hideFreeplay:Bool;
 	public var difficulties:String;
+
+	var songs:Array<Dynamic>;
+	var weekCharacters:Array<String>;
+	var weekBackground:String;
+	var weekBefore:String;
+	var storyName:String;
+	var weekName:String;
+	var freeplayColor:Array<Int>;
+	var startUnlocked:Bool;
+	var hiddenUntilUnlocked:Bool;
+	var hideStoryMode:Bool;
+	var hideFreeplay:Bool;
+	var difficulties:String;
 
 	public var fileName:String;
 
