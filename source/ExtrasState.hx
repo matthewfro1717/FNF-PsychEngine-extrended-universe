@@ -228,7 +228,7 @@ class ExtrasState extends MusicBeatState
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
 									case 'credits':
-										MusicBeatState.switchState(new CreditsState());;
+										MusicBeatState.switchState(new CreditsState());
 								}
 							});
 						}
