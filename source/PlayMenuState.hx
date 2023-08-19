@@ -159,10 +159,6 @@ class PlayMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-    super.update(elapsed);
-    if (FlxG.keys.justPressed.SEVEN)
-        MusicBeatState.switchState(new SecretWeekState()); // an example
-    
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -192,7 +188,13 @@ class PlayMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
-
+                      
+			if (controls.SEVEN)
+			{
+				selectedSomethin = true;
+				MusicBeatState.switchState(new SecretWeekState());
+			}
+			
 			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'donate')
