@@ -189,7 +189,7 @@ class PlayMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
                       
-			if (controls.SEVEN)
+			if (FlxG.keys.justPressed.SEVEN)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new SecretWeekState());
