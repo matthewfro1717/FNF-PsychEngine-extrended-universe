@@ -208,7 +208,7 @@ class DaveWeekState extends MusicBeatState
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
-		songs.push(songName, weekNum, songCharacter, color));
+		songs.push(songName, weekNum, songCharacter, color);
 	}
 
 	function weekIsLocked(name:String):Bool {
