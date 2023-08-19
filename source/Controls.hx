@@ -1,4 +1,4 @@
-fpackage;
+package;
 
 import flixel.FlxG;
 import flixel.input.FlxInput;
