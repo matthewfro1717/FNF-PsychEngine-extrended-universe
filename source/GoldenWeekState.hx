@@ -24,7 +24,7 @@ import sys.FileSystem;
 
 using StringTools;
 
-class GoldenWeeknState extends MusicBeatState
+class GoldenWeekState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
 
