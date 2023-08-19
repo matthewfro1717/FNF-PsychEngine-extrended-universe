@@ -133,7 +133,7 @@ class SecretWeekState extends MusicBeatState
 			grpSongs.add(songText);
 
 			var maxWidth = 980;
-			if (songText.width > maxWidth)
+			if (songText.width > maxWidth);
 			{
 				songText.scaleX = maxWidth / songText.width;
 			}
