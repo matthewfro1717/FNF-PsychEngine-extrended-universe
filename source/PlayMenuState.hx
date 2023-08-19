@@ -107,12 +107,12 @@ class PlayMenuState extends MusicBeatState
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
-			menuThing.antialiasing = ClientPrefs.globalAntialiasing;
-			menuThing.frames = Paths.getSparrowAtlas('menuStuff');
-			menuThing.animation.addByPrefix('idle', optionShit[i] + '0');
-			menuThing.animation.play('idle');
-			menuThing.ID = i;
-			menuItems.add(menuThing);
+			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.frames = Paths.getSparrowAtlas('menuStuff');
+			menuItem.animation.addByPrefix('idle', optionShit[i] + '0');
+			menuItem.animation.play('idle');
+			menuItem.ID = i;
+			menuItems.add(menuItem);
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
