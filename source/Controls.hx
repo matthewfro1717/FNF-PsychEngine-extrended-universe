@@ -1,4 +1,4 @@
-package;
+fpackage;
 
 import flixel.FlxG;
 import flixel.input.FlxInput;
@@ -150,7 +150,7 @@ class Controls extends FlxActionSet
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
-	var _SEVEN = new FlxActionDigital(Action.SEVEN);
+	var _seven = new FlxActionDigital(Action.SEVEN);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -337,7 +337,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
-		add(_SEVEN);
+		add(_seven);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -377,7 +377,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
-		add(_SEVEN);
+		add(_seven);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -435,7 +435,7 @@ class Controls extends FlxActionSet
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
-			case SEVEN: _SEVEN;
+			case SEVEN: _seven;
 		}
 	}
 
@@ -496,7 +496,7 @@ class Controls extends FlxActionSet
 			case RESET:
 				func(_reset, JUST_PRESSED);
 			case SEVEN:
-				func(_SEVEN, JUST_PRESSED);
+				func(_seven, JUST_PRESSED);
 		}
 	}
 
