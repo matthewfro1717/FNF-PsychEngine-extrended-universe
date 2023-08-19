@@ -133,7 +133,10 @@ class SecretWeekState extends MusicBeatState
 			grpSongs.add(songText);
 
 			var maxWidth = 980;
-			songText.scaleX = maxWidth / songText.width;
+			if (songText.width > maxWidth)
+			{
+				songText.scaleX = maxWidth / songText.width;
+			}
 			songText.snapToPosition();
 
 			Paths.currentModDirectory = songs[i].folder;
