@@ -186,13 +186,13 @@ class PlayMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.nextState(new TitleState());
+				MusicBeatState.switchState(new TitleState());
 			}
                       
 			if (FlxG.keys.justPressed.SEVEN)
 			{
 				selectedSomethin = true;
-				MusicBeatState.nextState(new SecretWeekState());
+				MusicBeatState.switchState(new SecretWeekState());
 			}
 			
 			if (controls.ACCEPT)
@@ -229,11 +229,11 @@ class PlayMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'extrended_universe':
-										MusicBeatState.nextState(new ExtrendedWeekState());
+										MusicBeatState.switchState(new ExtrendedWeekState());
 									case 'golden':
-										MusicBeatState.nextState(new GoldenWeekState());
+										MusicBeatState.switchState(new GoldenWeekState());
 									case 'dave_and_bambi':
-										MusicBeatState.nextState(new DaveWeekState());
+										MusicBeatState.switchState(new DaveWeekState());
 								}
 							});
 						}
