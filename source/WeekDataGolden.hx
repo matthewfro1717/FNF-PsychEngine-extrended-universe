@@ -118,7 +118,7 @@ class WeekDataGolden {
 		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/weekList.txt'));
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
-				var fileToCheck:String = directories[j] + 'universe-weeks/Golden/golden.json'';
+				var fileToCheck:String = directories[j] + 'universe-weeks/Golden/golden.json';
 				if(!weeksLoaded.exists(sexList[i])) {
 					var week:WeekFile = getWeekFile(fileToCheck);
 					if(week != null) {
