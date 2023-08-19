@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menuStuff.png"><SubTexture name="credits0000" x="0" y="0" width="464" height="200" frameX="0" frameY="0" frameWidth="464" frameHeight="200" />
+<SubTexture name="extras0000" x="464" y="0" width="462" height="199" frameX="0" frameY="0" frameWidth="462" frameHeight="199" />
+<SubTexture name="mods0000" x="926" y="0" width="463" height="199" frameX="0" frameY="0" frameWidth="463" frameHeight="199" />
+<SubTexture name="options0000" x="0" y="200" width="463" height="199" frameX="0" frameY="0" frameWidth="463" frameHeight="199" />
+<SubTexture name="play0000" x="463" y="200" width="462" height="200" frameX="0" frameY="0" frameWidth="462" frameHeight="200" />
+<SubTexture name="discord0000" x="925" y="200" width="464" height="201" frameX="0" frameY="0" frameWidth="464" frameHeight="201" />
+<SubTexture name="extrended_universe0000" x="0" y="401" width="615" height="158" frameX="0" frameY="0" frameWidth="615" frameHeight="158" />
+<SubTexture name="golden0000" x="615" y="401" width="615" height="158" frameX="0" frameY="0" frameWidth="615" frameHeight="158" />
+<SubTexture name="dave_and_bambi0000" x="1230" y="401" width="615" height="158" frameX="0" frameY="0" frameWidth="615" frameHeight="158" />
+</TextureAtlas>
