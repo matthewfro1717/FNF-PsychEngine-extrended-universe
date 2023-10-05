@@ -56,6 +56,26 @@ class GoldenWeekState extends MusicBeatState
 	public var color:Int = -7179779;
 	public var folder:String = "";
 
+	var songColors:Array<FlxColor> = [
+		0xFF00137F, // GF but its actually dave!
+		0xFF4965FF, // DAVE
+		0xFF00B515, // MISTER BAMBI RETARD (thats kinda rude ngl)
+		0xFF00FFFF, // SPLIT THE THONNNNN
+		0xFF800080, // FESTIVAL
+		0xFF116E1C, // MASTA BAMBI
+		0xFFFF0000, // KABUNGA
+		0xFF0EAE2C, // SECRET MOD LEAK
+		0xFFFF0000, // TRISTAN
+		FlxColor.fromRGB(162, 150, 188), // PLAYROBOT
+		FlxColor.fromRGB(44, 44, 44), // RECURSED
+		0xFF31323F, // MOLDY
+		0xFF35396C, // FIVE NIGHT
+		0xFF0162F5, // OVERDRIVE
+		0xFF119A2B, // CHEATING
+		0xFFFF0000, // UNFAIRNESS
+		0xFF810000, // EXPLOITATION
+	];
+
 	public function new(song:String, week:Int, songCharacter:String, color:Int)
 	{
 		this.songName = song;
@@ -73,17 +93,17 @@ class GoldenWeekState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
-		WeekDataGolden.reloadWeekFiles(false);
+		WeekData.reloadWeekFiles(false);
 
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		for (i in 0...WeekDataGolden.weeksList.length) {
-			if(weekIsLocked(WeekDataGolden.weeksList[i])) continue;
+		for (i in 0...WeekData.weeksList.length) {
+			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
-			var leWeek:WeekDataGolden = WeekDataGolden.weeksLoaded.get(WeekDataGolden.weeksList[i]);
+			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
 			var leSongs:Array<String> = [];
 			var leChars:Array<String> = [];
 
@@ -93,7 +113,7 @@ class GoldenWeekState extends MusicBeatState
 				leChars.push(leWeek.songs[j][1]);
 			}
 
-			WeekDataGolden.setDirectoryFromWeek(leWeek);
+			WeekData.setDirectoryFromWeek(leWeek);
 			for (song in leWeek.songs)
 			{
 				var colors:Array<Int> = song[2];
@@ -104,7 +124,7 @@ class GoldenWeekState extends MusicBeatState
 				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 			}
 		}
-		WeekDataGolden.loadTheFirstEnabledMod();
+		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -116,11 +136,19 @@ class GoldenWeekState extends MusicBeatState
 				addSong(songArray[0], 0, songArray[1], Std.parseInt(songArray[2]));
 			}
 		}*/
-
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/freeplay/gold', 'shared'));
+		bg.scrollFactor.set();
+		bg.antialiasing = false;
+		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
-		bg.screenCenter();
+
+	public function LoadSongs()
+	{
+         addWeek(['Stars'], 1, ['golden-bandu']);
+         addWeek(['Goldy-Breaker'], 2, ['disruptor']);
+	 addWeek(['Powerfull-Wheelchair'], 3, ['goldendave']);
+	}
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -151,7 +179,7 @@ class GoldenWeekState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
-		WeekDataGolden.setDirectoryFromWeek();
+		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -228,7 +256,7 @@ class GoldenWeekState extends MusicBeatState
 	}
 
 	function weekIsLocked(name:String):Bool {
-		var leWeek:WeekDataGolden = WeekDataGolden.weeksLoaded.get(name);
+		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
 	}
 
@@ -388,7 +416,7 @@ class GoldenWeekState extends MusicBeatState
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 
-			trace('CURRENT WEEK: ' + WeekDataGolden.getWeekFileName());
+			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
@@ -500,7 +528,7 @@ class GoldenWeekState extends MusicBeatState
 		PlayState.storyWeek = songs[curSelected].week;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		var diffStr:String = WeekDataGolden.getCurrentWeek().difficulties;
+		var diffStr:String = WeekData.getCurrentWeek().difficulties;
 		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
 
 		if(diffStr != null && diffStr.length > 0)
