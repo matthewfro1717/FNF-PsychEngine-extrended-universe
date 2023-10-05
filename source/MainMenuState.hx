@@ -31,7 +31,21 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
+		
+	var coolPos:Array<Float> = [
+		97.8,
+		498.7,
+		899.65,
+		#if switch
+		298.25,
+		699.15
+		#else
+		97.8,
+		498.7,
+		899.6
+		#end
+	];
+
 	var optionShit:Array<String> = [
 		'play',
 		'extras',
