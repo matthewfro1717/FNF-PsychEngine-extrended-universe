@@ -143,17 +143,6 @@ class ExtrendedWeekState extends MusicBeatState
 		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
 
-	public function LoadSongs()
-	{
-         addWeek(['Black-Spikes'], 1, ['dembo']);
-         addWeek(['Blue-Stars'], 2, ['bamblix']);
-	 addWeek(['Figures'], 3, ['figumbi']);
-         addWeek(['Contented'], 4, ['bambiminion']);
-	 addWeek(['Burger-Blast'], 5, ['bamburg']);
-         addWeek(['Breakpoint'], 6, ['yambi']);
-         addWeek(['Deep-Dish'], 7, ['cruster']);
-         addWeek(['Fully-Breakfast'], 8 ['fully-breakfast']);
-	}
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -246,6 +235,18 @@ class ExtrendedWeekState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text);
 		super.create();
+	}
+
+	public function LoadSongs()
+	{
+         addWeek(['Black-Spikes'], 1, ['dembo']);
+         addWeek(['Blue-Stars'], 2, ['bamblix']);
+	 addWeek(['Figures'], 3, ['figumbi']);
+         addWeek(['Contented'], 4, ['bambiminion']);
+	 addWeek(['Burger-Blast'], 5, ['bamburg']);
+         addWeek(['Breakpoint'], 6, ['yambi']);
+         addWeek(['Deep-Dish'], 7, ['cruster']);
+         addWeek(['Fully-Breakfast'], 8 ['fully-breakfast']);
 	}
 
 	override function closeSubState() {
