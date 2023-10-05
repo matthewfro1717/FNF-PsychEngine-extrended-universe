@@ -143,13 +143,6 @@ class DaveWeekState extends MusicBeatState
 		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
 
-	public function LoadSongs()
-	{
-         addWeek(['corned'], 3, ['bambi']);
-         addWeek(['whoopsie'], 14, ['expunged']);
-	 addWeek(['binomial', 'get-ready', 'polynomial'], 1, ['dave', 'dave-annoyed', 'dave-angey']);
-	}
-
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -242,6 +235,13 @@ class DaveWeekState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text);
 		super.create();
+	}
+
+        public function LoadSongs()
+	{
+         addWeek(['corned'], 3, ['bambi']);
+         addWeek(['whoopsie'], 14, ['expunged']);
+	 addWeek(['binomial', 'get-ready', 'polynomial'], 1, ['dave', 'dave-annoyed', 'dave-angey']);
 	}
 
 	override function closeSubState() {
