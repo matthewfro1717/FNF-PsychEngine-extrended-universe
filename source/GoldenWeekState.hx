@@ -143,13 +143,6 @@ class GoldenWeekState extends MusicBeatState
 		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
 
-	public function LoadSongs()
-	{
-         addWeek(['Stars'], 1, ['golden-bandu']);
-         addWeek(['Goldy-Breaker'], 2, ['disruptor']);
-	 addWeek(['Powerfull-Wheelchair'], 3, ['goldendave']);
-	}
-
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -242,6 +235,13 @@ class GoldenWeekState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text);
 		super.create();
+	}
+
+	public function LoadSongs()
+	{
+         addWeek(['Stars'], 1, ['golden-bandu']);
+         addWeek(['Goldy-Breaker'], 2, ['disruptor']);
+	 addWeek(['Powerfull-Wheelchair'], 3, ['goldendave']);
 	}
 
 	override function closeSubState() {
