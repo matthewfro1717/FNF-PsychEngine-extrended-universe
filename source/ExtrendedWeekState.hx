@@ -56,6 +56,26 @@ class ExtrendedWeekState extends MusicBeatState
 	public var color:Int = -7179779;
 	public var folder:String = "";
 
+	var songColors:Array<FlxColor> = [
+		0xFF00137F, // GF but its actually dave!
+		0xFF4965FF, // DAVE
+		0xFF00B515, // MISTER BAMBI RETARD (thats kinda rude ngl)
+		0xFF00FFFF, // SPLIT THE THONNNNN
+		0xFF800080, // FESTIVAL
+		0xFF116E1C, // MASTA BAMBI
+		0xFFFF0000, // KABUNGA
+		0xFF0EAE2C, // SECRET MOD LEAK
+		0xFFFF0000, // TRISTAN
+		FlxColor.fromRGB(162, 150, 188), // PLAYROBOT
+		FlxColor.fromRGB(44, 44, 44), // RECURSED
+		0xFF31323F, // MOLDY
+		0xFF35396C, // FIVE NIGHT
+		0xFF0162F5, // OVERDRIVE
+		0xFF119A2B, // CHEATING
+		0xFFFF0000, // UNFAIRNESS
+		0xFF810000, // EXPLOITATION
+	];
+
 	public function new(song:String, week:Int, songCharacter:String, color:Int)
 	{
 		this.songName = song;
@@ -116,12 +136,24 @@ class ExtrendedWeekState extends MusicBeatState
 				addSong(songArray[0], 0, songArray[1], Std.parseInt(songArray[2]));
 			}
 		}*/
-
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/freeplay/speis', 'shared'));
+		bg.scrollFactor.set();
+		bg.antialiasing = false;
+		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
-		bg.screenCenter();
 
+	public function LoadSongs()
+	{
+         addWeek(['Black-Spikes'], 1, ['dembo']);
+         addWeek(['Blue-Stars'], 2, ['bamblix']);
+	 addWeek(['Figures'], 3, ['figumbi']);
+         addWeek(['Contented'], 4, ['bambiminion']);
+	 addWeek(['Burger-Blast'], 5, ['bamburg']);
+         addWeek(['Breakpoint'], 6, ['yambi']);
+         addWeek(['Deep-Dish'], 7, ['cruster']);
+         addWeek(['Fully-Breakfast'], 8 ['fully-breakfast']);
+	}
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
@@ -225,6 +257,22 @@ class ExtrendedWeekState extends MusicBeatState
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
 		songs.push(songName, weekNum, songCharacter, color);
+	}
+
+	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
+	{
+		if (songCharacters == null)
+			songCharacters = ['bf'];
+
+		var num:Int = 0;
+
+		for (song in songs)
+		{
+			addSong(song, weekNum, songCharacters[num]);
+
+			if (songCharacters.length != 1)
+				num++;
+		}
 	}
 
 	function weekIsLocked(name:String):Bool {
