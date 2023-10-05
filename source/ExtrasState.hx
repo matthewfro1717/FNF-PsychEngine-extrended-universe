@@ -32,7 +32,21 @@ class ExtrasState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
+		
+	var coolPos:Array<Float> = [
+		97.8,
+		498.7,
+		899.65,
+		#if switch
+		298.25,
+		699.15
+		#else
+		97.8,
+		498.7,
+		899.6
+		#end
+	];
+
 	var optionShit:Array<String> = [
 		#if MODS_ALLOWED 'mods', #end
 		'credits',
@@ -107,13 +121,16 @@ class ExtrasState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('menuStuff');
-			menuItem.animation.addByPrefix('idle', optionShit[i] + '0');
-			menuItem.animation.play('idle');
-			menuItem.ID = i;
-			menuItems.add(menuItem);
+			var upDown:Bool = (i > 2);
+			var menuThing:FlxSprite = new FlxSprite(coolPos[i], upDown ? 367.65 : 20);
+			trace(coolPos[i]);
+			menuThing.antialiasing = ClientPrefs.globalAntialiasing;
+			menuThing.frames = Paths.getSparrowAtlas('menuStuff');
+			menuThing.animation.addByPrefix('idle', optionShit[i] + '0');
+			menuThing.animation.addByPrefix('selected', optionShit[i] + '_SELECTED');
+			menuThing.animation.play('idle');
+			menuThing.ID = i;
+			menuItems.add(menuThing);
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
