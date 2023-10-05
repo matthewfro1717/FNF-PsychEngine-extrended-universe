@@ -56,6 +56,26 @@ class SecretWeekState extends MusicBeatState
 	public var color:Int = -7179779;
 	public var folder:String = "";
 
+	var songColors:Array<FlxColor> = [
+		0xFF00137F, // GF but its actually dave!
+		0xFF4965FF, // DAVE
+		0xFF00B515, // MISTER BAMBI RETARD (thats kinda rude ngl)
+		0xFF00FFFF, // SPLIT THE THONNNNN
+		0xFF800080, // FESTIVAL
+		0xFF116E1C, // MASTA BAMBI
+		0xFFFF0000, // KABUNGA
+		0xFF0EAE2C, // SECRET MOD LEAK
+		0xFFFF0000, // TRISTAN
+		FlxColor.fromRGB(162, 150, 188), // PLAYROBOT
+		FlxColor.fromRGB(44, 44, 44), // RECURSED
+		0xFF31323F, // MOLDY
+		0xFF35396C, // FIVE NIGHT
+		0xFF0162F5, // OVERDRIVE
+		0xFF119A2B, // CHEATING
+		0xFFFF0000, // UNFAIRNESS
+		0xFF810000, // EXPLOITATION
+	];
+
 	public function new(song:String, week:Int, songCharacter:String, color:Int)
 	{
 		this.songName = song;
@@ -116,11 +136,12 @@ class SecretWeekState extends MusicBeatState
 				addSong(songArray[0], 0, songArray[1], Std.parseInt(songArray[2]));
 			}
 		}*/
-
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/freeplay/secret', 'shared'));
+		bg.scrollFactor.set();
+		bg.antialiasing = false;
+		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 		add(bg);
-		bg.screenCenter();
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -214,6 +235,14 @@ class SecretWeekState extends MusicBeatState
 		text.scrollFactor.set();
 		add(text);
 		super.create();
+	}
+
+	public function LoadSongs()
+	{
+         addWeek(['Goofy-Keyboard'], 1, ['jschlatt']);
+         addWeek(['Egg-Torsion'], 2, ['pichai']);
+	 addWeek(['Iniustitiam'], 3, ['krembi']);
+         addWeek(['Codekill'], 4, ['emma']);
 	}
 
 	override function closeSubState() {
