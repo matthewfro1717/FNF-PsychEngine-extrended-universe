@@ -17,7 +17,7 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WeekDataSecret;
+import WeekData;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -73,17 +73,17 @@ class SecretWeekState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
-		WeekDataSecret.reloadWeekFiles(false);
+		WeekData.reloadWeekFiles(false);
 
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		for (i in 0...WeekDataSecret.weeksList.length) {
-			if(weekIsLocked(WeekDataSecret.weeksList[i])) continue;
+		for (i in 0...WeekData.weeksList.length) {
+			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
-			var leWeek:WeekDataSecret = WeekDataSecret.weeksLoaded.get(WeekDataSecret.weeksList[i]);
+			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
 			var leSongs:Array<String> = [];
 			var leChars:Array<String> = [];
 
@@ -93,7 +93,7 @@ class SecretWeekState extends MusicBeatState
 				leChars.push(leWeek.songs[j][1]);
 			}
 
-			WeekDataSecret.setDirectoryFromWeek(leWeek);
+			WeekData.setDirectoryFromWeek(leWeek);
 			for (song in leWeek.songs)
 			{
 				var colors:Array<Int> = song[2];
@@ -104,7 +104,7 @@ class SecretWeekState extends MusicBeatState
 				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 			}
 		}
-		WeekDataSecret.loadTheFirstEnabledMod();
+		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -151,7 +151,7 @@ class SecretWeekState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
-		WeekDataSecret.setDirectoryFromWeek();
+		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -228,7 +228,7 @@ class SecretWeekState extends MusicBeatState
 	}
 
 	function weekIsLocked(name:String):Bool {
-		var leWeek:WeekDataSecret = WeekDataSecret.weeksLoaded.get(name);
+		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
 	}
 
@@ -388,7 +388,7 @@ class SecretWeekState extends MusicBeatState
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 
-			trace('CURRENT WEEK: ' + WeekDataSecret.getWeekFileName());
+			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
@@ -500,7 +500,7 @@ class SecretWeekState extends MusicBeatState
 		PlayState.storyWeek = songs[curSelected].week;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		var diffStr:String = WeekDataSecret.getCurrentWeek().difficulties;
+		var diffStr:String = WeekData.getCurrentWeek().difficulties;
 		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
 
 		if(diffStr != null && diffStr.length > 0)
