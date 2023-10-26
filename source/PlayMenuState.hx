@@ -250,7 +250,7 @@ class PlayMenuState extends MusicBeatState
 									case 'golden':
 										MusicBeatState.switchState(new GoldenWeekState());
 									case 'dave_and_bambi':
-										MusicBeatState.switchState(new DaveWeekState());
+										MusicBeatState.switchState(new DaveAndBambiWeekState());
 								}
 							});
 						}
