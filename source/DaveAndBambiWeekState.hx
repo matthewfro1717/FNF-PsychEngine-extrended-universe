@@ -24,7 +24,7 @@ import sys.FileSystem;
 
 using StringTools;
 
-class DaveWeekState extends MusicBeatState
+class DaveAndBambiWeekState extends MusicBeatState
 {
 	var songs:Int = 0;
 
