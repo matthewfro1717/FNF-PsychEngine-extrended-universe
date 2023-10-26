@@ -56,7 +56,7 @@ class ExtrendedWeekState extends MusicBeatState
 	public var color:Int = -7179779;
 	public var folder:String = "";
 
-	var songColors:Array<FlxColor> = [
+		var songColors:Array<FlxColor> = [
 		0xFF00137F, // GF but its actually dave!
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD (thats kinda rude ngl)
@@ -78,13 +78,7 @@ class ExtrendedWeekState extends MusicBeatState
 
 	public function new(song:String, week:Int, songCharacter:String, color:Int)
 	{
-		this.songName = song;
-		this.week = week;
-		this.songCharacter = songCharacter;
-		this.color = color;
-		this.folder = Paths.currentModDirectory;
-		if(this.folder == null) this.folder = '';
-	}
+		this.songName =
 
 	override function create()
 	{
