@@ -822,7 +822,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, B],
 			Control.PAUSE => [START],
 			Control.RESET => [8]
-		        Control.SEVEN => [7]);
+		        Control.SEVEN => [7];
 		]);
 		#else
 		addGamepadLiteral(id, [
@@ -839,7 +839,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, A],
 			Control.PAUSE => [START],
 			Control.RESET => [8],
-		        Control.SEVEN => [7]);
+		        Control.SEVEN => [7];
 		]);
 		#end
 	}
