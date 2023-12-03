@@ -205,6 +205,12 @@ class PlayMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
+
+			if (controls.SEVEN)
+			{
+				selectedSomethin = true;
+				MusicBeatState.switchState(new SecretWeekState());
+			}
 			
 			if (controls.ACCEPT)
 			{
@@ -245,6 +251,9 @@ class PlayMenuState extends MusicBeatState
 										MusicBeatState.switchState(new GoldenWeekState());
 									case 'dave_and_bambi':
 										MusicBeatState.switchState(new DaveAndBambiWeekState());
+									case 'secret':
+										MusicBeatState.switchState(new SecretWeekState());
+										
 								}
 							});
 						}
