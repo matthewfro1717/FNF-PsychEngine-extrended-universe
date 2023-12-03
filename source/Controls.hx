@@ -42,6 +42,7 @@ enum abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var SEVEN = "seven";
 }
 #else
 @:enum
@@ -75,6 +76,7 @@ abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var SEVEN = "seven";
 }
 #end
 
@@ -103,6 +105,7 @@ enum Control
 	ACCEPT;
 	BACK;
 	PAUSE;
+	SEVEN;
 }
 
 enum KeyboardScheme
@@ -147,6 +150,7 @@ class Controls extends FlxActionSet
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
+	var _seven = new FlxActionDigital(Action.SEVEN);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -297,6 +301,11 @@ class Controls extends FlxActionSet
 	inline function get_RESET()
 		return _reset.check();
 
+	public var SEVEN(get, never):Bool;
+
+	inline function get_SEVEN()
+		return _seven.check();
+
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
 	{
@@ -330,6 +339,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
+		add(_seven);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -369,6 +379,7 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
+		add(_seven);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -426,6 +437,7 @@ class Controls extends FlxActionSet
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
+	                case SEVEN: _seven;
 		}
 	}
 
