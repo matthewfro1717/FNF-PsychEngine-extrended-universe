@@ -76,10 +76,6 @@ class ExtrendedWeekState extends MusicBeatState
 		0xFF810000, // EXPLOITATION
 	];
 
-	public function new(song:String, week:Int, songCharacter:String, color:Int)
-	{
-		this.songName =
-
 	override function create()
 	{
 		//Paths.clearStoredMemory();
