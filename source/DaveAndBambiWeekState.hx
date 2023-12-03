@@ -76,16 +76,6 @@ class DaveAndBambiWeekState extends MusicBeatState
 		0xFF810000, // EXPLOITATION
 	];
 
-	public function new(song:String, week:Int, songCharacter:String, color:Int)
-	{
-		this.songName = song;
-		this.week = week;
-		this.songCharacter = songCharacter;
-		this.color = color;
-		this.folder = Paths.currentModDirectory;
-		if(this.folder == null) this.folder = '';
-	}
-
 	override function create()
 	{
 		//Paths.clearStoredMemory();
