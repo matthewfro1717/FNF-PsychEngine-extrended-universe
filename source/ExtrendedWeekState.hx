@@ -489,16 +489,18 @@ class ExtrendedWeekState extends MusicBeatState
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
-			
-		var newColor:Int = songs[curSelected].color;
+					var newColor:Int = songs[curSelected].color;
 		if(newColor != intendedColor) {
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
 			intendedColor = newColor;
-			onComplete: {
-			colorTween = null;
+			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
+				onComplete: function(twn:FlxTween) {
+					colorTween = null;
 				}
 			});
 		}
-
 		// selector.y = (70 * curSelected) + 30;
 
 		#if !switch
