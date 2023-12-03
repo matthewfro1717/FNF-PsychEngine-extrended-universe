@@ -479,8 +479,8 @@ class ExtrendedWeekState extends MusicBeatState
 		positionHighscore();
 	}
 
-	function changeSelection(change:Int = 0, playSound:Bool = true)
-	{
+	function changeSelection(change:Int = 0, playSound:Bool = true) {
+
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected += change;
@@ -493,8 +493,8 @@ class ExtrendedWeekState extends MusicBeatState
 		var newColor:Int = songs[curSelected].color;
 		if(newColor != intendedColor) {
 			intendedColor = newColor;
-				onComplete: function(twn:FlxTween) {
-					colorTween = null;
+			onComplete: {
+			colorTween = null;
 				}
 			});
 		}
