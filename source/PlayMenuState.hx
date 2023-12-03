@@ -205,12 +205,6 @@ class PlayMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
-                      
-			if (FlxG.keys.justPressed.SEVEN)
-			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new SecretWeekState());
-			}
 			
 			if (controls.ACCEPT)
 			{
