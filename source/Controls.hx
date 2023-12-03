@@ -497,6 +497,8 @@ class Controls extends FlxActionSet
 				func(_pause, JUST_PRESSED);
 			case RESET:
 				func(_reset, JUST_PRESSED);
+			case SEVEN:
+				func(_seven, JUST_PRESSED);
 		}
 	}
 
@@ -665,6 +667,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, keysMap.get('back'));
 				inline bindKeys(Control.PAUSE, keysMap.get('pause'));
 				inline bindKeys(Control.RESET, keysMap.get('reset'));
+				inline bindKeys(Control.SEVEN, keysMap.get('seven'));
 			case Duo(true):
 				inline bindKeys(Control.UI_UP, [W]);
 				inline bindKeys(Control.UI_DOWN, [S]);
@@ -678,6 +681,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, [H, X]);
 				inline bindKeys(Control.PAUSE, [ONE]);
 				inline bindKeys(Control.RESET, [R]);
+				inline bindKeys(Control.SEVEN, [7]);
 			case Duo(false):
 				inline bindKeys(Control.UI_UP, [FlxKey.UP]);
 				inline bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -691,6 +695,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, [P]);
 				inline bindKeys(Control.PAUSE, [ENTER]);
 				inline bindKeys(Control.RESET, [BACKSPACE]);
+				inline bindKeys(Control.SEVEN, [7]);
 			case None: // nothing
 			case Custom: // nothing
 		}
@@ -710,6 +715,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 				bindKeys(Control.RESET, [R]);
+				bindKeys(Control.SEVEN, [7]);
 			case Duo(true):
 				bindKeys(Control.UI_UP, [W]);
 				bindKeys(Control.UI_DOWN, [S]);
@@ -723,6 +729,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [H, X]);
 				bindKeys(Control.PAUSE, [ONE]);
 				bindKeys(Control.RESET, [R]);
+				bindKeys(Control.SEVEN, [7]);
 			case Duo(false):
 				bindKeys(Control.UI_UP, [FlxKey.UP]);
 				bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -736,6 +743,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [P]);
 				bindKeys(Control.PAUSE, [ENTER]);
 				bindKeys(Control.RESET, [BACKSPACE]);
+				bindKeys(Control.SEVEN, [7]);
 			case None: // nothing
 			case Custom: // nothing
 		}
@@ -814,6 +822,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, B],
 			Control.PAUSE => [START],
 			Control.RESET => [8]
+		        Control.SEVEN => [7]);
 		]);
 		#else
 		addGamepadLiteral(id, [
@@ -830,6 +839,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, A],
 			Control.PAUSE => [START],
 			Control.RESET => [8],
+		        Control.SEVEN => [7]);
 		]);
 		#end
 	}
