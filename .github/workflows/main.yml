@@ -52,7 +52,7 @@ jobs:
           haxelib git systools https://github.com/haya3218/systools
           haxelib run lime rebuild systools linux
           haxelib install hxcpp-debug-server
-          haxelib instll hxCodec
+          haxelib install hxCodec
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
@@ -97,7 +97,7 @@ jobs:
           haxelib git systools https://github.com/haya3218/systools
           haxelib run lime rebuild systools windows
           haxelib install hxcpp-debug-server
-          haxelib instll hxCodec
+          haxelib install hxCodec
           haxelib list
         shell: cmd
       - name: Create Version Tag
@@ -143,7 +143,7 @@ jobs:
           haxelib git systools https://github.com/haya3218/systools
           haxelib run lime rebuild systools mac
           haxelib install hxcpp-debug-server
-          haxelib instll hxCodec
+          haxelib install hxCodec
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
