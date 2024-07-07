@@ -1,0 +1,50 @@
+{
+	"storyName": "golden",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "gold",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Stars",
+			"golden-bandu",
+			[
+				255,
+				193,
+				33
+			]
+		],
+		[
+			"Goldy-Breaker",
+			"disruptor",
+			[
+				255,
+				193,
+				33
+			]
+		],
+		[
+			"Powerfull-Wheelchair",
+			"goldendave",
+			[
+				255,
+				193,
+				33
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "golden"
+}

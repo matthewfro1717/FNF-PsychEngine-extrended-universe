@@ -1,0 +1,50 @@
+{
+	"songs": [
+		[
+			"binomial",
+			"dave",
+			[
+				66,
+				113,
+				253
+			]
+		],
+		[
+			"get-ready",
+			"dave-annoyed",
+			[
+				66,
+				113,
+				253
+			]
+		],
+		[
+			"polynomial",
+			"dave-angey",
+			[
+				235,
+				153,
+				175
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "dave",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "dave week",
+	"weekName": "dave week",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
