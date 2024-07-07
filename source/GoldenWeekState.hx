@@ -1,569 +1,267 @@
 package;
 
-#if desktop
-import Discord.DiscordClient;
-#end
-import editors.ChartingState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxTween;
-import lime.utils.Assets;
-import flixel.system.FlxSound;
-import openfl.utils.Assets as OpenFlAssets;
-import WeekData;
 #if MODS_ALLOWED
+import sys.io.File;
 import sys.FileSystem;
 #end
+import lime.utils.Assets;
+import openfl.utils.Assets as OpenFlAssets;
+import haxe.Json;
+import haxe.format.JsonParser;
 
 using StringTools;
 
-class GoldenWeekState extends MusicBeatState
+typedef ArcWeekFile =
 {
-	var songs:Int = 0;
+	// JSON variables
+	var songs:Array<Dynamic>;
+	var weekCharacters:Array<String>;
+	var weekBackground:String;
+	var weekBefore:String;
+	var storyName:String;
+	var weekName:String;
+	var freeplayColor:Array<Int>;
+	var startUnlocked:Bool;
+	var hiddenUntilUnlocked:Bool;
+	var hideStoryMode:Bool;
+	var hideFreeplay:Bool;
+	var difficulties:String;
+}
 
-	var selector:FlxText;
-	private static var curSelected:Int = 0;
-	var curDifficulty:Int = -1;
-	private static var lastDifficultyName:String = '';
+class ArcWeekData {
+	public static var universe-weeksLoaded:Map<String, ArcWeekData> = new Map<String, ArcWeekData>();
+	public static var universe-weeksList:Array<String> = [];
+	public var folder:String = '';
+	
+	// JSON variables
+	public var songs:Array<Dynamic>;
+	public var weekCharacters:Array<String>;
+	public var weekBackground:String;
+	public var weekBefore:String;
+	public var storyName:String;
+	public var weekName:String;
+	public var freeplayColor:Array<Int>;
+	public var startUnlocked:Bool;
+	public var hiddenUntilUnlocked:Bool;
+	public var hideStoryMode:Bool;
+	public var hideFreeplay:Bool;
+	public var difficulties:String;
 
-	var scoreBG:FlxSprite;
-	var scoreText:FlxText;
-	var diffText:FlxText;
-	var lerpScore:Int = 0;
-	var lerpRating:Float = 0;
-	var intendedScore:Int = 0;
-	var intendedRating:Float = 0;
+	public var fileName:String;
 
-	private var grpSongs:FlxTypedGroup<Alphabet>;
-	private var curPlaying:Bool = false;
+	public static function createArcWeekFile():ArcWeekFile {
+		var ArcweekFile:ArcWeekFile = {
+			songs: [["Bopeebo", "dad", [146, 113, 253]], ["Fresh", "dad", [146, 113, 253]], ["Dad Battle", "dad", [146, 113, 253]]],
+			weekCharacters: ['dad', 'bf', 'gf'],
+			weekBackground: 'stage',
+			weekBefore: 'tutorial',
+			storyName: 'Your New Week',
+			weekName: 'Custom Week',
+			freeplayColor: [146, 113, 253],
+			startUnlocked: true,
+			hiddenUntilUnlocked: false,
+			hideStoryMode: false,
+			hideFreeplay: false,
+			difficulties: ''
+		};
+		return ArcweekFile;
+	}
 
-	private var iconArray:Array<HealthIcon> = [];
+	// HELP: Is there any way to convert a WeekFile to WeekData without having to put all variables there manually? I'm kind of a noob in haxe lmao
+	public function new(ArcweekFile:ArcWeekFile, fileName:String) {
+		songs = ArcweekFile.songs;
+		weekCharacters = ArcweekFile.weekCharacters;
+		weekBackground = ArcweekFile.weekBackground;
+		weekBefore = ArcweekFile.weekBefore;
+		storyName = ArcweekFile.storyName;
+		weekName = ArcweekFile.weekName;
+		freeplayColor = ArcweekFile.freeplayColor;
+		startUnlocked = ArcweekFile.startUnlocked;
+		hiddenUntilUnlocked = ArcweekFile.hiddenUntilUnlocked;
+		hideStoryMode = ArcweekFile.hideStoryMode;
+		hideFreeplay = ArcweekFile.hideFreeplay;
+		difficulties = ArcweekFile.difficulties;
 
-	var bg:FlxSprite;
-	var intendedColor:Int;
-	var colorTween:FlxTween;
+		this.fileName = fileName;
+	}
 
-	public var songName:String = "";
-	public var week:Int = 0;
-	public var songCharacter:String = "";
-	public var color:Int = -7179779;
-	public var folder:String = "";
-
-	var songColors:Array<FlxColor> = [
-		0xFF00137F, // GF but its actually dave!
-		0xFF4965FF, // DAVE
-		0xFF00B515, // MISTER BAMBI RETARD (thats kinda rude ngl)
-		0xFF00FFFF, // SPLIT THE THONNNNN
-		0xFF800080, // FESTIVAL
-		0xFF116E1C, // MASTA BAMBI
-		0xFFFF0000, // KABUNGA
-		0xFF0EAE2C, // SECRET MOD LEAK
-		0xFFFF0000, // TRISTAN
-		FlxColor.fromRGB(162, 150, 188), // PLAYROBOT
-		FlxColor.fromRGB(44, 44, 44), // RECURSED
-		0xFF31323F, // MOLDY
-		0xFF35396C, // FIVE NIGHT
-		0xFF0162F5, // OVERDRIVE
-		0xFF119A2B, // CHEATING
-		0xFFFF0000, // UNFAIRNESS
-		0xFF810000, // EXPLOITATION
-	];
-
-	override function create()
+	public static function reloadArcWeekFiles(isArcStoryMode:Null<Bool> = false)
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
-		
-		persistentUpdate = true;
-		PlayState.isStoryMode = false;
-		WeekData.reloadWeekFiles(false);
-
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
-		#end
-
-		for (i in 0...WeekData.weeksList.length) {
-			if(weekIsLocked(WeekData.weeksList[i])) continue;
-
-			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
-			var leSongs:Array<String> = [];
-			var leChars:Array<String> = [];
-
-			for (j in 0...leWeek.songs.length)
+		universe-weeksList = [];
+		universe-weeksLoaded.clear();
+		#if MODS_ALLOWED
+		var disabledMods:Array<String> = [];
+		var modsListPath:String = 'modsList.txt';
+		var directories:Array<String> = [Paths.mods(), Paths.getPreloadPath()];
+		var originalLength:Int = directories.length;
+		if(FileSystem.exists(modsListPath))
+		{
+			var stuff:Array<String> = CoolUtil.coolTextFile(modsListPath);
+			for (i in 0...stuff.length)
 			{
-				leSongs.push(leWeek.songs[j][0]);
-				leChars.push(leWeek.songs[j][1]);
-			}
-
-			WeekData.setDirectoryFromWeek(leWeek);
-			for (song in leWeek.songs)
-			{
-				var colors:Array<Int> = song[2];
-				if(colors == null || colors.length < 3)
+				var splitName:Array<String> = stuff[i].trim().split('|');
+				if(splitName[1] == '0') // Disable mod
 				{
-					colors = [146, 113, 253];
+					disabledMods.push(splitName[0]);
 				}
-				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+				else // Sort mod loading order based on modsList.txt file
+				{
+					var path = haxe.io.Path.join([Paths.mods(), splitName[0]]);
+					//trace('trying to push: ' + splitName[0]);
+					if (sys.FileSystem.isDirectory(path) && !Paths.ignoreModFolders.contains(splitName[0]) && !disabledMods.contains(splitName[0]) && !directories.contains(path + '/'))
+					{
+						directories.push(path + '/');
+						//trace('pushed Directory: ' + splitName[0]);
+					}
+				}
 			}
 		}
-		WeekData.loadTheFirstEnabledMod();
 
-		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
-
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
-		for (i in 0...initSonglist.length)
+		var modsDirectories:Array<String> = Paths.getModDirectories();
+		for (folder in modsDirectories)
 		{
-			if(initSonglist[i] != null && initSonglist[i].length > 0) {
-				var songArray:Array<String> = initSonglist[i].split(":");
-				addSong(songArray[0], 0, songArray[1], Std.parseInt(songArray[2]));
-			}
-		}*/
-		
-		bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/freeplay/gold', 'shared'));
-		bg.scrollFactor.set();
-		bg.antialiasing = false;
-		bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
-		add(bg);
-
-		grpSongs = new FlxTypedGroup<Alphabet>();
-		add(grpSongs);
-
-		for (i in 0...songs.length)
-		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
-			songText.isMenuItem = true;
-			songText.targetY = i - curSelected;
-			grpSongs.add(songText);
-
-			var maxWidth = 980;
-			if (songText.width > maxWidth)
+			var pathThing:String = haxe.io.Path.join([Paths.mods(), folder]) + '/';
+			if (!disabledMods.contains(folder) && !directories.contains(pathThing))
 			{
-				songText.scaleX = maxWidth / songText.width;
+				directories.push(pathThing);
+				//trace('pushed Directory: ' + folder);
 			}
-			songText.snapToPosition();
-
-			Paths.currentModDirectory = songs[i].folder;
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
-
-			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
-
-			// songText.x += 40;
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
 		}
-		WeekData.setDirectoryFromWeek();
-
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-
-		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
-		scoreBG.alpha = 0.6;
-		add(scoreBG);
-
-		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
-		diffText.font = scoreText.font;
-		add(diffText);
-
-		add(scoreText);
-
-		if(curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
-		intendedColor = bg.color;
-
-		if(lastDifficultyName == '')
-		{
-			lastDifficultyName = CoolUtil.defaultDifficulty;
-		}
-		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
-		
-		changeSelection();
-		changeDiff();
-
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
-
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
-
-		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
-		textBG.alpha = 0.6;
-		add(textBG);
-
-		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 16;
 		#else
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 18;
+		var directories:Array<String> = [Paths.getPreloadPath()];
+		var originalLength:Int = directories.length;
 		#end
-		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
-		text.scrollFactor.set();
-		add(text);
-		super.create();
-	}
 
-	public function LoadSongs()
-	{
-         addWeek(['Stars'], 1, ['golden-bandu']);
-         addWeek(['Goldy-Breaker'], 2, ['disruptor']);
-	 addWeek(['Powerfull-Wheelchair'], 3, ['goldendave']);
-	}
+		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('universe-weeks/Golden/weekList.txt'));
+		for (i in 0...sexList.length) {
+			for (j in 0...directories.length) {
+				var fileToCheck:String = directories[j] + 'universe-weeks/Golden/.' + sexList[i] + '.json';
+				if(!universe-weeksLoaded.exists(sexList[i])) {
+					var Arcweek:ArcWeekFile = getArcWeekFile(fileToCheck);
+					if(Arcweek != null) {
+						var ArcweekFile:ArcWeekData = new ArcWeekData(Arcweek, sexList[i]);
 
-	override function closeSubState() {
-		changeSelection(0, false);
-		persistentUpdate = true;
-		super.closeSubState();
-	}
+						#if MODS_ALLOWED
+						if(j >= originalLength) {
+							ArcweekFile.folder = directories[j].substring(Paths.mods().length, directories[j].length-1);
+						}
+						#end
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
-	{
-		songs.push(songName, weekNum, songCharacter, color);
-	}
-
-	function weekIsLocked(name:String):Bool {
-		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
-		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
-	}
-
-	/*public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
-	{
-		if (songCharacters == null)
-			songCharacters = ['bf'];
-
-		var num:Int = 0;
-		for (song in songs)
-		{
-			addSong(song, weekNum, songCharacters[num]);
-			this.songs[this.songs.length-1].color = weekColor;
-
-			if (songCharacters.length != 1)
-				num++;
-		}
-	}*/
-
-	var instPlaying:Int = -1;
-	public static var vocals:FlxSound = null;
-	var holdTime:Float = 0;
-	override function update(elapsed:Float)
-	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
-		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, CoolUtil.boundTo(elapsed * 24, 0, 1)));
-		lerpRating = FlxMath.lerp(lerpRating, intendedRating, CoolUtil.boundTo(elapsed * 12, 0, 1));
-
-		if (Math.abs(lerpScore - intendedScore) <= 10)
-			lerpScore = intendedScore;
-		if (Math.abs(lerpRating - intendedRating) <= 0.01)
-			lerpRating = intendedRating;
-
-		var ratingSplit:Array<String> = Std.string(Highscore.floorDecimal(lerpRating * 100, 2)).split('.');
-		if(ratingSplit.length < 2) { //No decimals, add an empty space
-			ratingSplit.push('');
-		}
-		
-		while(ratingSplit[1].length < 2) { //Less than 2 decimals in it, add decimals then
-			ratingSplit[1] += '0';
-		}
-
-		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
-		positionHighscore();
-
-		var upP = controls.UI_UP_P;
-		var downP = controls.UI_DOWN_P;
-		var accepted = controls.ACCEPT;
-		var space = FlxG.keys.justPressed.SPACE;
-		var ctrl = FlxG.keys.justPressed.CONTROL;
-
-		var shiftMult:Int = 1;
-		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
-
-		if(songs.length > 1)
-		{
-			if (upP)
-			{
-				changeSelection(-shiftMult);
-				holdTime = 0;
+						if(ArcweekFile != null && (isArcStoryMode == null || (isArcStoryMode && !ArcweekFile.hideStoryMode) || (!isArcStoryMode && !ArcweekFile.hideFreeplay))) {
+							universe-weeksLoaded.set(sexList[i], ArcweekFile);
+							universe-weeksList.push(sexList[i]);
+						}
+					}
+				}
 			}
-			if (downP)
-			{
-				changeSelection(shiftMult);
-				holdTime = 0;
-			}
+		}
 
-			if(controls.UI_DOWN || controls.UI_UP)
-			{
-				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
-				holdTime += elapsed;
-				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
-
-				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
+		#if MODS_ALLOWED
+		for (i in 0...directories.length) {
+			var directory:String = directories[i] + 'universe-weeks/Golden/';
+			if(FileSystem.exists(directory)) {
+				var listOfWeeks:Array<String> = CoolUtil.coolTextFile(directory + 'weekList.txt');
+				for (daWeek in listOfWeeks)
 				{
-					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
-					changeDiff();
+					var path:String = directory + daWeek + '.json';
+					if(sys.FileSystem.exists(path))
+					{
+						addWeek(daWeek, path, directories[i], i, originalLength);
+					}
 				}
-			}
 
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
-				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
-				changeDiff();
-			}
-		}
-
-		if (controls.UI_LEFT_P)
-			changeDiff(-1);
-		else if (controls.UI_RIGHT_P)
-			changeDiff(1);
-		else if (upP || downP) changeDiff();
-
-		if (controls.BACK)
-		{
-			persistentUpdate = false;
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
-		}
-
-		if(ctrl)
-		{
-			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
-		}
-		else if(space)
-		{
-			if(instPlaying != curSelected)
-			{
-				#if PRELOAD_ALL
-				destroyFreeplayVocals();
-				FlxG.sound.music.volume = 0;
-				Paths.currentModDirectory = songs[curSelected].folder;
-				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				if (PlayState.SONG.needsVoices)
-					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-				else
-					vocals = new FlxSound();
-
-				FlxG.sound.list.add(vocals);
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				vocals.play();
-				vocals.persist = true;
-				vocals.looped = true;
-				vocals.volume = 0.7;
-				instPlaying = curSelected;
-				#end
-			}
-		}
-
-		else if (accepted)
-		{
-			persistentUpdate = false;
-			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
-			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-			/*#if MODS_ALLOWED
-			if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
-			#else
-			if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
-			#end
-				poop = songLowercase;
-				curDifficulty = 1;
-				trace('Couldnt find file');
-			}*/
-			trace(poop);
-
-			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
-			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
-
-			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
-			
-			if (FlxG.keys.pressed.SHIFT){
-				LoadingState.loadAndSwitchState(new ChartingState());
-			}else{
-				LoadingState.loadAndSwitchState(new PlayState());
-			}
-
-			FlxG.sound.music.volume = 0;
-					
-			destroyFreeplayVocals();
-		}
-		else if(controls.RESET)
-		{
-			persistentUpdate = false;
-			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
-		}
-		super.update(elapsed);
-	}
-
-	public static function destroyFreeplayVocals() {
-		if(vocals != null) {
-			vocals.stop();
-			vocals.destroy();
-		}
-		vocals = null;
-	}
-
-	function changeDiff(change:Int = 0)
-	{
-		curDifficulty += change;
-
-		if (curDifficulty < 0)
-			curDifficulty = CoolUtil.difficulties.length-1;
-		if (curDifficulty >= CoolUtil.difficulties.length)
-			curDifficulty = 0;
-
-		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
-
-		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
-		#end
-
-		PlayState.storyDifficulty = curDifficulty;
-		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
-		positionHighscore();
-	}
-
-	function changeSelection(change:Int = 0, playSound:Bool = true)
-	{
-		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
-			curSelected = 0;
-			
-		var newColor:Int = songs[curSelected].color;
-		if(newColor != intendedColor) {
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
-			intendedColor = newColor;
-			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
-				onComplete: function(twn:FlxTween) {
-					colorTween = null;
-				}
-			});
-		}
-
-		// selector.y = (70 * curSelected) + 30;
-
-		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
-		#end
-
-		var bullShit:Int = 0;
-
-		for (i in 0...iconArray.length)
-		{
-			iconArray[i].alpha = 0.6;
-		}
-
-		iconArray[curSelected].alpha = 1;
-
-		for (item in grpSongs.members)
-		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
-
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
-			}
-		}
-		
-		Paths.currentModDirectory = songs[curSelected].folder;
-		PlayState.storyWeek = songs[curSelected].week;
-
-		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		var diffStr:String = WeekData.getCurrentWeek().difficulties;
-		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
-
-		if(diffStr != null && diffStr.length > 0)
-		{
-			var diffs:Array<String> = diffStr.split(',');
-			var i:Int = diffs.length - 1;
-			while (i > 0)
-			{
-				if(diffs[i] != null)
+				for (file in FileSystem.readDirectory(directory))
 				{
-					diffs[i] = diffs[i].trim();
-					if(diffs[i].length < 1) diffs.remove(diffs[i]);
+					var path = haxe.io.Path.join([directory, file]);
+					if (!sys.FileSystem.isDirectory(path) && file.endsWith('.json'))
+					{
+						addWeek(file.substr(0, file.length - 5), path, directories[i], i, originalLength);
+					}
 				}
-				--i;
 			}
+		}
+		#end
+	}
 
-			if(diffs.length > 0 && diffs[0].length > 0)
+	private static function addWeek(ArcweekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
+	{
+		if(!universe-weeksLoaded.exists(ArcweekToCheck))
+		{
+			var week:ArcWeekFile = getArcWeekFile(path);
+			if(week != null)
 			{
-				CoolUtil.difficulties = diffs;
+				var ArcweekFile:ArcWeekData = new ArcWeekData(week, ArcweekToCheck);
+				if(i >= originalLength)
+				{
+					#if MODS_ALLOWED
+					ArcweekFile.folder = directory.substring(Paths.mods().length, directory.length-1);
+					#end
+				}
+				if((PlayState.isArcStoryMode && !ArcweekFile.hideStoryMode) || (!PlayState.isArcStoryMode && !ArcweekFile.hideFreeplay))
+				{
+					universe-weeksLoaded.set(ArcweekToCheck, ArcweekFile);
+					universe-weeksList.push(ArcweekToCheck);
+				}
 			}
-		}
-		
-		if(CoolUtil.difficulties.contains(CoolUtil.defaultDifficulty))
-		{
-			curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
-		}
-		else
-		{
-			curDifficulty = 0;
-		}
-
-		var newPos:Int = CoolUtil.difficulties.indexOf(lastDifficultyName);
-		//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
-		if(newPos > -1)
-		{
-			curDifficulty = newPos;
 		}
 	}
 
-	private function positionHighscore() {
-		scoreText.x = FlxG.width - scoreText.width - 6;
+	private static function getArcWeekFile(path:String):ArcWeekFile {
+		var rawJson:String = null;
+		#if MODS_ALLOWED
+		if(FileSystem.exists(path)) {
+			rawJson = File.getContent(path);
+		}
+		#else
+		if(OpenFlAssets.exists(path)) {
+			rawJson = Assets.getText(path);
+		}
+		#end
 
-		scoreBG.scale.x = FlxG.width - scoreText.x + 6;
-		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
-		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
-		diffText.x -= diffText.width / 2;
+		if(rawJson != null && rawJson.length > 0) {
+			return cast Json.parse(rawJson);
+		}
+		return null;
+	}
+
+	//   FUNCTIONS YOU WILL PROBABLY NEVER NEED TO USE
+
+	//To use on PlayState.hx or Highscore stuff
+	public static function getArcWeekFileName():String {
+		return universe-weeksList[PlayState.storyWeek];
+	}
+
+	//Used on LoadingState, nothing really too relevant
+	public static function getCurrentArcWeek():ArcWeekData {
+		return universe-weeksLoaded.get(universe-weeksList[PlayState.ArcstoryWeek]);
+	}
+
+	public static function setDirectoryFromWeek(?data:ArcWeekData = null) {
+		Paths.currentModDirectory = '';
+		if(data != null && data.folder != null && data.folder.length > 0) {
+			Paths.currentModDirectory = data.folder;
+		}
+	}
+
+	public static function loadTheFirstEnabledMod()
+	{
+		Paths.currentModDirectory = '';
+		
+		#if MODS_ALLOWED
+		if (FileSystem.exists("modsList.txt"))
+		{
+			var list:Array<String> = CoolUtil.listFromString(File.getContent("modsList.txt"));
+			var foundTheTop = false;
+			for (i in list)
+			{
+				var dat = i.split("|");
+				if (dat[1] == "1" && !foundTheTop)
+				{
+					foundTheTop = true;
+					Paths.currentModDirectory = dat[0];
+				}
+			}
+		}
+		#end
 	}
 }

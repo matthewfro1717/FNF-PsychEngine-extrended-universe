@@ -209,7 +209,7 @@ class PlayMenuState extends MusicBeatState
 			if (controls.SEVEN)
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new SecretWeekState());
+				MusicBeatState.switchState(new SecretFreeplayState());
 			}
 			
 			if (controls.ACCEPT)
@@ -246,13 +246,13 @@ class PlayMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'extrended_universe':
-										MusicBeatState.switchState(new ExtrendedWeekState());
+										MusicBeatState.switchState(new ExtrendedFreeplayState());
 									case 'golden':
-										MusicBeatState.switchState(new GoldenWeekState());
+										MusicBeatState.switchState(new GoldenFreeplayState());
 									case 'dave_and_bambi':
-										MusicBeatState.switchState(new DaveAndBambiWeekState());
+										MusicBeatState.switchState(new DaveAndBambiFreeplayState());
 									case 'secret':
-										MusicBeatState.switchState(new SecretWeekState());
+										MusicBeatState.switchState(new SecretFreeplayState());
 										
 								}
 							});
